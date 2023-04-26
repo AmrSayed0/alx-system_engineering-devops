@@ -1,11 +1,6 @@
 #!/bin/bash
 
-for file in *; do
-    # Check if the file is not hidden and is a regular file
-    if [[ ! $file =~ ^\..* && -f $file ]]; then
-        # Extract the part of the name after the first dash
-        name=$(echo "$file" | cut -d '-' -f 2-)
-        # Display the modified name
-        echo "$name"
-    fi
+list=$(ls)
+for i in $list; do
+  echo "$i" | cut -d '-' -f2
 done
