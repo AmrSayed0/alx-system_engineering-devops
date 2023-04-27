@@ -5,14 +5,6 @@
 #include <unistd.h>
 
 /**
- * Write a C program that creates 5 zombie processes.
-
- * For every zombie process created, it displays Zombie process created, ZOMBIE_PID
- * Your code should use the Betty style. It will be checked using betty-style.pl and betty-doc.pl
- * When your code is done creating the parent process and the zombies, use the function bellow
- */
-
-/**
  * infinite_while - Run an infinite while loop.
  *
  * Return: Always 0.
