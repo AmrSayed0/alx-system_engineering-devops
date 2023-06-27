@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Installs Nginx and configures it with the following specifications:
+## Nginx should listen on port 80
+## When making a GET request to Nginx's root / using curl, it should return a page containing the string "Hello World!"
+## This script is designed to configure a new Ubuntu machine to meet the requirements above (to be executed on the server itself)
+## Note: Systemctl is not used for restarting Nginx
+
+apt-get -y update
+apt-get -y install nginx
+
+touch /var/www/html/index.html
+echo "Hello World!" > /var/www/html/index.html
+
+printf %s "server {
+    listen		80 default_server;
+    listen		[::]:80 default_server;
+
+    root		/var/www/html;
+    index		index.html index.htm index.nginx-debian.html;
+}
+" > /etc/nginx/sites-available/default
+
+service nginx restart
