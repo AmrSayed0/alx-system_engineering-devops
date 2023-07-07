@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Connecting to my lb-01 server using the private key.
+ssh -i ~/.ssh/school ubuntu@100.25.190.150
