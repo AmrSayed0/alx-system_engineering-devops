@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-# Connecting to my lb-01 server using the private key.
-
-ssh ubuntu@100.25.190.150 -i ~/.ssh/id_rsa
