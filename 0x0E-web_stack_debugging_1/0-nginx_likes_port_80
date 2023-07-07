@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Configure the Ubuntu container to operate on port 80 for incoming connections.
+
+new="80 default_server"
+old="8080 default_server"
+sed -i "s/$old/$new/" /etc/nginx/sites-enabled/default
+
+service nginx restart
