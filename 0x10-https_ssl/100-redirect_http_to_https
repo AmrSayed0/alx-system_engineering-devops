@@ -46,7 +46,7 @@ frontend www-http
 
 frontend www-https
     mode http
-    bind *:443 ssl crt /etc/haproxy/certs/www.topunderscodebnb.tech.pem
+    bind *:443 ssl crt /etc/haproxy/certs/www.amracademy.tech.pem
     reqadd X-Forwarded-Proto:\ https
     acl letsencrypt-acl path_beg /.well-known/acme-challenge/
     use_backend letsencrypt-backend if letsencrypt-acl
@@ -57,8 +57,8 @@ backend www-backend
     http-request set-header X-Forwarded-For %[src]
     balance roundrobin
     redirect scheme https if !{ ssl_fc }
-    server 1723-web-01 100.26.181.86:80 check
-    server 1723-web-02 34.238.192.13:80 check
+    server 206553-web-01 54.144.133.171:80 check
+    server 206553-web-02 52.201.221.140:80 check
 
 backend letsencrypt-backend
     mode http
