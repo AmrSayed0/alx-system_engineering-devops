@@ -45,7 +45,7 @@ frontend www-http
 
 frontend www-https
     mode http
-    bind *:443 ssl crt /etc/haproxy/certs/www.amracademy.tech.pem
+    bind *:443 ssl crt /etc/letsencrypt/live/www.amracademy.tech/www.amracademy.tech.pem
     reqadd X-Forwarded-Proto:\ https
     acl letsencrypt-acl path_beg /.well-known/acme-challenge/
     use_backend letsencrypt-backend if letsencrypt-acl
