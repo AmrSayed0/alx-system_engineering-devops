@@ -31,7 +31,7 @@ frontend http-in
 
 backend servers
 		balance	roundrobin
-		server	206553-web-01 54.236.8.236:80 check
-		server	206553-web-02 100.26.10.87:80 check" | sudo tee -a /etc/haproxy/haproxy.cfg > /dev/null
+		server	206553-web-01 54.144.133.171:80 check
+		server	206553-web-02 52.201.221.140:80 check" | sudo tee -a /etc/haproxy/haproxy.cfg > /dev/null
 
 sudo service haproxy restart
