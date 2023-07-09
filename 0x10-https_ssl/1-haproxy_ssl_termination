@@ -34,8 +34,7 @@ defaults
         errorfile 504 /etc/haproxy/errors/504.http
 
 frontend www-https
-        bind *:443 ssl crt /etc/haproxy/certs/www.amracademy.tech.pem
-        reqadd X-Forwarded-Proto:\ https
+        bind *:443 ssl crt /etc/letsencrypt/live/www.amracademy.tech/www.amracademy.tech.pem
         acl letsencrypt-acl path_beg /.well-known/acme-challenge/
         use_backend letsencrypt-backend if letsencrypt-acl
         default_backend web-server
