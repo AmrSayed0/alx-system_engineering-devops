@@ -344,7 +344,3 @@ www.khanacademy.org
 ## What is an SSL certificate - Definition and Explanation
 
 ### An SSL certificate is a digital certificate that authenticates a website's identity and enables an encrypted...
-
-www.kaspersky.com
-
-](https://www.kaspersky.com/resource-center/definitions/what-is-a-ssl-certificate)[](https://www.kaspersky.com/resource-center/definitions/what-is-a-ssl-certificate)
