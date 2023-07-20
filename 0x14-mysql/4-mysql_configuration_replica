@@ -7,3 +7,4 @@ symbolic-links=0
 server-id = 1
 log_bin = /var/log/mysql/mysql_bin_log.log
 binlog_do_db = school
+relay_log = /var/log/mysql/mysql-relay-bin.log
