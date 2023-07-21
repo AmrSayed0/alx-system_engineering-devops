@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-# Find files containing "127.0.0.1" in /etc/nginx/sites-available/ and replace with "0.0.0.0"
-grep -rli "127.0.0.1" /etc/nginx/sites-available/ | xargs sed -i "s/127.0.0.1/0.0.0.0/g"
-# Restart Nginx service to apply the changes
-service nginx restart
