@@ -2,45 +2,49 @@
 """Function to count words in all hot posts of a given Reddit subreddit."""
 import requests
 
-def count_words(subreddit, word_list, after=None, word_count={}):
-    # Set a custom User-Agent to avoid Too Many Requests error
-    headers = {'User-Agent': 'My Reddit API Client'}
 
-    # Send a GET request to the subreddit's API endpoint for hot posts
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-    params = {'limit': 100, 'after': after}
-    response = requests.get(url, headers=headers, params=params)
+def count_words(subreddit, word_list, count_dict={}, after=None):
+    """Prints counts of given words found in hot posts of a given subreddit.
 
-    # Check if the response is successful
-    if response.status_code == 200:
-        data = response.json()
-        posts = data['data']['children']
-
+    Args:
+        subreddit (str): The subreddit to search.
+        word_list (list): The list of words to search for in post titles.
+        instances (obj): Key/value pairs of words/counts.
+        after (str): The parameter for the next page of the API results.
+        count (int): The parameter of results matched thus far.
+    """
+    params = {"limit": 50}
+    if after:
+        params["after"] = after
+    req = requests.get(
+        "https://www.reddit.com/r/{}/hot.json".format(subreddit),
+        headers={
+            "User-Agent": "underscoDe@alx-holbertonschool"},
+        params=params,
+        allow_redirects=False)
+    if req.status_code == 200:
+        posts = req.json().get("data").get("children")
         for post in posts:
-            title = post['data']['title'].lower()
-
+            title = post.get("data").get("title")
+            word_list = [word.lower() for word in word_list]
             for word in word_list:
-                word = word.lower()
-                if word in title:
-                    if word in word_count:
-                        word_count[word] += 1
-                    else:
-                        word_count[word] = 1
-
-        # Check if there are more posts to fetch (pagination)
-        after = data['data']['after']
-        if after:
-            return count_words(subreddit, word_list, after, word_count)
+                w_count = title.split().count(word)
+                if count_dict.get(word):
+                    count_dict[word] += w_count
+                else:
+                    count_dict[word] = w_count
+        if req.json().get("data").get("after"):
+            count_words(
+                subreddit,
+                word_list=word_list,
+                count_dict=count_dict,
+                after=req.json().get("data").get("after"))
         else:
-            sorted_words = sorted(word_count.items(), key=lambda x: (-x[1], x[0]))
-            for word, count in sorted_words:
-                print(f"{word}: {count}")
-    elif response.status_code == 404:  # Invalid subreddit
-        print("Invalid subreddit.")
-    else:
-        print(f"An error occurred: {response.status_code}")
-
-if __name__ == '__main__':
-    subreddit = input("Enter a subreddit name: ")
-    word_list = input("Enter keywords separated by spaces: ").split()
-    count_words(subreddit, word_list)
+            for pair in sorted(
+                    count_dict.items(),
+                    key=lambda kv: (
+                        kv[1],
+                        kv[0]),
+                    reverse=True):
+                if pair[1]:
+                    print("{}: {}".format(pair[0].strip(), pair[1]))
