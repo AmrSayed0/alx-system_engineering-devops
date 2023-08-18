@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-# Logging into my server.
-ssh -i ~/.ssh/school ubuntu@54.90.59.130
+# Logging into my server
+
+ssh ubuntu -i ~/.ssh/school
