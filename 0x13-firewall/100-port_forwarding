@@ -1,0 +1,14 @@
+# Modify UFW configuration for port forwarding
+sudo bash -c 'cat <<EOF > /etc/ufw/before.rules
+*nat
+:PREROUTING ACCEPT [0:0]
+-A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+COMMIT
+EOF'
+
+# Update Nginx configuration to listen on port 80
+sudo sed -i 's/listen 80 default_server;/listen 8080 default_server;/' /etc/nginx/sites-enabled/default
+
+# Reload UFW and restart Nginx
+sudo ufw reload
+sudo service nginx restart
