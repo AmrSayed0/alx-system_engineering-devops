@@ -49,8 +49,8 @@ frontend http
 
 backend web-server
     balance roundrobin
-    server 206553-web-01 54.144.133.171:80 check
-    server 206553-web-02 52.201.221.140:80 check
+    server 206553-web-01 100.26.57.202:80 check
+    server 206553-web-02 54.157.148.181:80 check
 
 backend letsencrypt-backend
     server letsencrypt 127.0.0.1:54321
